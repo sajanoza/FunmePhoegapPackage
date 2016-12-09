@@ -1,25 +1,59 @@
 document.addEventListener('deviceready', initMyScript, false);
 
+var windowWidth;
+var windowHeight;
+
+$(function(){
+    document.addEventListener("deviceready", function() {
+           windowWidth = $(window).width();
+           windowHeight = $(window).height();
+    });
+});
+
+
+
+
+
+
+function mignijObrazkiem(obrazek){
+		obrazek.animate({
+    opacity: "+=1",
+  }, 500, function() {
+    	obrazek.animate({
+    opacity: "-=1",
+  }, 500, function() {
+    // Animation complete.
+  });
+  });
+}
+
+
 function initMyScript(){
 	
-	/*$(document).swipe( {
+$(document).swipe( {
   swipeUp:function(event, direction, distance, duration) {  
     console.log("You swiped up");
 	sendReaction(userId,currentContentId,3);
+	mignijObrazkiem($("#likeIconImg"));
   },
   swipeDown:function(event, direction, distance, duration) {
     console.log("You swiped down");
 	sendReaction(userId,currentContentId,1);
+	mignijObrazkiem($("#banIconImg"));
   },
   swipeLeft:function(event, direction, distance, duration) {
     console.log("You swiped left");
 	sendReaction(userId,currentContentId,2);
+	mignijObrazkiem($("#dontcareIconImg"));
+	
+	
+	
   },
   click:function(event, target) { 
   },
   threshold:50,
   allowPageScroll:"horizontal"
-});*/
+});
 
 
 var fcTitleH1 = document.getElementById("fcTitleH1");
@@ -149,6 +183,9 @@ function przetworzResponseCntentu(response){
 		currentContentId = 	response.id;
 		
 		fcContentDiv.innerHTML = fcContentHTML;	
+		var obrazek = fcContentDiv.childNodes[0];
+		skalujObrazek(obrazek);
+		
 		fcTitleH1.innerHTML = fcTitle;
 		
 	}
@@ -156,7 +193,30 @@ function przetworzResponseCntentu(response){
 
 
 
+function skalujObrazek(obrazek){
+	obrazek.onload= function(){
+	var imageRatio = obrazek.width/obrazek.height;
+	var windowRatio = windowWidth/windowHeight;
+	if (imageRatio<windowRatio){
+		console.log("skalujemy do wysokości okno jest bardziej horyzontalne niz obrazek");
+		$(obrazek).height(windowHeight);
+		$(obrazek).width(windowHeight*imageRatio);
+	}else {
+		console.log("skalujemy do szerokosci okno jest bardziej wertykalne niz obrazek");
+		$(obrazek).width(windowWidth);
+		$(obrazek).height(windowWidth/imageRatio);
+	}
+	if (obrazek.height<windowHeight){
+		var topMargin = (windowHeight-obrazek.height)/2;
+		$(obrazek).css("margin-top",topMargin);
+	}
+	
+	
+	
+	console.log(obrazek.width);
+	}
 
+}
 
 
 

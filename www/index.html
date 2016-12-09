@@ -15,16 +15,21 @@
 </head>
 
 <body>
+
 <div class="container-fluid" align="center">
-
-
-
+	<div align="center">
+    <img id="likeIconImg", src="img/like_icon.png" style="opacity:0; position:absolute" />
+    <img id="banIconImg", src="img/ban_icon.png" style="opacity:0; position:absolute" />
+    <img id="dontcareIconImg", src="img/dontcare_icon.png" style="opacity:0; position:absolute" />
+    </div>
+	
     <div id="ramkaWew">
 
-        <h1 id="fcTitleH1">tutytul</h1>
-        <div id="fcContentDiv">tucontent</div>
-        
-        <div id="buttonContainer">
+        <h1 id="fcTitleH1" style="display:none">tutytul</h1>
+        <div align="center">
+        	<div id="fcContentDiv">tucontent</div>
+        </div>
+        <div id="buttonContainer" style="display:none">
             <button class="btn btn-danger" type="button" id="banBtn">Ban</button>
             <button class="btn btn-warning" type="button" id="dontCareBtn">I don't care</button>
             <button class="btn btn-success" type="button" id="likeBtn">Like</button>
@@ -41,6 +46,8 @@
         </div>
     </div>-->
     <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/jquery.touchSwipe.min.js"></script>
     <script type="text/javascript" src="js/index.js"></script>
     <script src="js/md5.min.js"></script>
     <script type="text/javascript">
